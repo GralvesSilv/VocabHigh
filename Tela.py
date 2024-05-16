@@ -1,6 +1,9 @@
 import streamlit as st
 import google.generativeai as genai
 
+from Card import Card
+from Deck import Deck
+
 API_KEY = "AIzaSyDgi6r54JYIOks09va5QDx4AYRwYq17B2U"
 
 genai.configure(api_key=API_KEY)
@@ -31,6 +34,8 @@ Você é um professor de inglês para crianças brasileiras. Use palavras simple
           resposta: love, I love you, amor, eu amo você
           pergunta: book
           resposta: book, That book is interesting, livro, aquele livro é interesante
+          pergunta: car
+          resposta: car, The car is blue, carro, o carro é azul
 5. Não use vírgulas no meio das frases, pois arruinará a formatação. Se a fraase criada tiver vírgula, substitua por ; ou apenas um ponto.
 6. Não inclua mais nenhuma instrução ou explicação.
 """)
@@ -42,3 +47,15 @@ with st.container():
     if prompt:
         response = chat.send_message(prompt)
         st.write(response.text)
+
+        # Dividindo a string em substrings usando a vírgula como separador
+        values = response.text.split(',')
+
+        # Atribuindo os valores às variáveis correspondentes
+        target_word = values[0].strip()
+        sentence = values[1].strip()
+        translation = values[2].strip()
+        definitions = values[3].strip()
+        card = Card(target_word, sentence, translation, definitions)
+        deck = Deck()
+        deck.add_card(card)

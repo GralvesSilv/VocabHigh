@@ -1,3 +1,4 @@
+# configurações da I.A
 safety_settings = {
     "HARASSMENT": "BLOCK_NONE",
     "HATE": "BLOCK_NONE",

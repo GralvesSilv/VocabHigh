@@ -1,5 +1,6 @@
 import csv
 import os
+import random
 from Card import Card
 
 
@@ -46,3 +47,9 @@ class Deck:
                 target_word, sentence, translation, definition = row
                 card = Card(target_word, sentence, translation, definition)
                 self.add_card(card)
+
+    def get_random_card(self):
+        if not self.cards:
+            return None  # Retorna None se o baralho estiver vazio
+        return random.choice(self.cards)
+

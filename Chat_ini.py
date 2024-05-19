@@ -1,7 +1,7 @@
 import google.generativeai as genai
 
 
-class Ai_config:
+class Chat_ini:
     def __init__(self, api_key, safety_settings, generation_config, system_instruction):
         genai.configure(api_key=api_key)
         model = genai.GenerativeModel(model_name="gemini-1.5-flash-latest",

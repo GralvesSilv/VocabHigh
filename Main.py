@@ -1,7 +1,7 @@
 import streamlit as st
 from Card import Card
 from Deck import Deck
-from Ai_config import Ai_config
+from Chat_ini import Chat_ini
 import Ai_settings
 
 # Carrega o deck antes de inicializar o estado
@@ -9,20 +9,24 @@ deck_filename = 'deck.csv'
 deck = Deck()
 deck.load_from_file(deck_filename)
 
+
 # Função para obter um novo card
 def get_new_card(deck):
     return deck.get_random_card() if deck.cards else None
+
 
 # Função para mostrar a resposta
 def show_answer():
     st.session_state.show_answer = True
     st.experimental_rerun()
 
+
 # Função para pegar um novo card
 def next_card():
     st.session_state.card = get_new_card(deck)
     st.session_state.show_answer = False
     st.experimental_rerun()
+
 
 # Função para interagir com o chatbot
 def chat_with_bot(chat, prompt):
@@ -36,8 +40,8 @@ def main():
     st.set_page_config(page_title="VocabHigh")
 
     api_key = st.text_input("Insira a APIKEY", type="password")
-    chat = Ai_config(api_key, Ai_settings.safety_settings, Ai_settings.generation_config,
-                     Ai_settings.system_instruction)
+    chat = Chat_ini(api_key, Ai_settings.safety_settings, Ai_settings.generation_config,
+                    Ai_settings.system_instruction)
 
     st.title("VocabHigh")
 
@@ -81,4 +85,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

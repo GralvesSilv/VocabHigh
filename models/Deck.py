@@ -1,8 +1,7 @@
 import csv
 import os
 import random
-from Card import Card
-
+from VocabHigh.models.Card import Card
 
 class Deck:
     def __init__(self):
@@ -16,8 +15,7 @@ class Deck:
             self.cards.remove(card)
 
     def show_deck_details(self):
-        deck_details_text = ""  # Inicializa uma string vazia para armazenar as informações das cartas
-
+        deck_details_text = ""
         for index, card in enumerate(self.cards, start=1):
             deck_details_text += (
                 f"Card {index}:\n"
@@ -25,8 +23,7 @@ class Deck:
                 f"  Sentence: {card.get_sentence()}\n"
                 f"  Translation: {card.get_translation()}\n"
                 f"  Definitions: {card.get_definition()}\n\n"
-            )  # Adiciona todas as informações da carta ao texto
-
+            )
         return deck_details_text
 
     def save_to_file(self, filename):
@@ -40,7 +37,7 @@ class Deck:
 
     def load_from_file(self, filename):
         if not os.path.exists(filename):
-            return  # Se o arquivo não existe, simplesmente retorna
+            return
         with open(filename, 'r', newline='') as csvfile:
             reader = csv.reader(csvfile)
             for row in reader:
@@ -50,6 +47,5 @@ class Deck:
 
     def get_random_card(self):
         if not self.cards:
-            return None  # Retorna None se o baralho estiver vazio
+            return None
         return random.choice(self.cards)
-

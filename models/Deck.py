@@ -1,7 +1,7 @@
 import csv
 import os
 import random
-from VocabHigh.models.Card import Card
+from models.Card import Card
 
 class Deck:
     def __init__(self):

@@ -1,8 +1,8 @@
 import streamlit as st
-from VocabHigh.models.Card import Card
-from VocabHigh.models.Deck import Deck
-from VocabHigh.services.Chat_ini import Chat_ini
-from VocabHigh.config import Ai_settings
+from models.Card import Card
+from models.Deck import Deck
+from services.Chat_ini import Chat_ini
+from config import Ai_settings
 
 # Carrega o deck antes de inicializar o estado
 deck_filename = 'deck.csv'

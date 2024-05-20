@@ -1,6 +1,6 @@
 # VocabHigh: Domine o Inglês com a ajuda da Inteligência Artificial
 <div align="center">
-    <img src="icon.jpeg"/>
+    <img src="icon.jpeg" width="500px"/>
 </div>
 
 ## Sobre o Projeto

@@ -3,21 +3,24 @@ from models.Card import Card
 from models.Deck import Deck
 from services.Chat_ini import Chat_ini
 from config import Ai_settings
-from utils.deck_utils import save_to_file, load_from_file
+from utils.deck_utils import save_deck_to_file, load_deck_from_file
 
 # Carrega o deck antes de inicializar o estado
 deck_filename = 'deck.csv'
 deck = Deck()
-load_from_file(deck, deck_filename)
+load_deck_from_file(deck, deck_filename)
+
 
 # Função para obter um novo card
 def get_new_card(deck):
     return deck.get_random_card() if deck.cards else None
 
+
 # Função para mostrar a resposta
 def show_answer():
     st.session_state.show_answer = True
     st.experimental_rerun()
+
 
 # Função para pegar um novo card
 def next_card():
@@ -25,11 +28,13 @@ def next_card():
     st.session_state.show_answer = False
     st.experimental_rerun()
 
+
 # Função para interagir com o chatbot
 def chat_with_bot(chat, prompt):
     response = chat.send_message(prompt)
     st.write(response.text)
     return [item.strip() for item in response.text.split(',')]
+
 
 # Função principal para executar o aplicativo
 def main():
@@ -56,7 +61,7 @@ def main():
                 target_word, sentence, translation, definitions = values
                 card = Card(target_word, sentence, translation, definitions)
                 deck.add_card(card)
-                save_to_file(deck, deck_filename)
+                save_deck_to_file(deck, deck_filename)
 
     with st.container():
         st.subheader("Flashcards")
@@ -77,6 +82,7 @@ def main():
                     next_card()
         else:
             st.write("O deck está vazio. Adicione novos flashcards para começar.")
+
 
 if __name__ == "__main__":
     main()

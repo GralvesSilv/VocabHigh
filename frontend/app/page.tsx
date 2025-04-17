@@ -1,11 +1,20 @@
 'use client'
 
+import Flashcard from '@/components/flashcard/Flashcard';
 import { useState } from 'react';
+
+
+type FlashcardData = {
+  target_word: string;
+  sentence: string;
+  translation: string;
+  definition: string;
+}
 
 export default function Home() {
   const [word, setWord] = useState('');
   const [apiKey, setApikey] = useState('');
-  const [flashcard, setFlashcard] = useState('');
+  const [flashcard, setFlashcard] = useState<FlashcardData | null>(null);
 
   const handleSubmit = async () => {
     const res = await fetch('http://localhost:8000/flashcard', {
@@ -42,12 +51,8 @@ export default function Home() {
         Gerar
       </button>
       
-      {flashcard && (
-        <div className="mt-4 p-4 border bg-gray-100">
-          <strong>Flashcard:</strong>
-          <p>{flashcard}</p>
-        </div>
-      )}
+      {flashcard && <Flashcard {...flashcard} />}
+
     </main>
   );
 }

@@ -33,7 +33,18 @@ def generate_flashcard(request: WordRequest):
         prompt = request.word
         response = chat.send_message(prompt)
 
-        return {"flashcard": response.text}
+        parts = [p.strip() for p in response.text.split(',')]
+        if len(parts) !=4:
+            raise ValueError("Resposta inesperada do modelo. Esperado 4 partes separadas por vírgula.")
+
+        return {
+            "flashcard": {
+                "target_word": parts[0],
+                "sentence": parts[1],
+                "translation": parts[2],
+                "definition": parts[3],
+            }
+        }
     
     except Exception as e:
         print("erro:", str(e))
